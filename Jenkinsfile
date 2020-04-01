@@ -27,16 +27,14 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh' 
             }
         }
-	stage('Send email') {
-	    def mailRecipients = "devmohamed@gmail.com"
-	    def jobName = currentBuild.fullDisplayName
 
-	    emailext body: '''${SCRIPT, template="groovy-html.template"}''',
-		mimeType: 'text/html',
-		subject: "[Jenkins] ${jobName}",
-		to: "${mailRecipients}",
-		replyTo: "${mailRecipients}",
-		recipientProviders: [[$class: 'CulpritsRecipientProvider']]
-	}
+ 	stage('Mail') { 
+            steps {
+                def emailBody = '${SCRIPT, template="regressionfailed.groovy"}'
+		def emailSubject = "${env.JOB_NAME} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}"
+		emailext(mimeType: 'text/html', replyTo: 'devmohamed990@gmail.com', subject: emailSubject, to: 'devmohamed990@gmail.com', body: emailBody) 
+            }
+        }
+	
     }
 }
