@@ -36,7 +36,7 @@ pipeline {
 	post {
         always {
 
-            emailext body: 'Mohamed Arafa', subject: 'Hello', to: 'devmohamedar990@gmail.com'
+            mail bcc: '', body: 'Hello', cc: '', from: '', replyTo: '', subject: 'Hello', to: 'devmohamedar990@gmail.com'
             
         }
     }
