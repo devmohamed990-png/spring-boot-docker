@@ -36,15 +36,15 @@ pipeline {
 	post {
         always {
 		emailext body: 
-		"""Result : ${currentBuild.currentResult} \\n
-		Job Name : ${env.JOB_NAME} \\n
-		Build Number : ${env.BUILD_NUMBER} \\n
-		Build URL : ${env.BUILD_URL} \\n
-		Build Name : ${env.BUILD_DISPLAY_NAME} \\n
-		Base Name Of Job : ${env.JOB_BASE_NAME} \\n
-		Executor Number : ${env.EXECUTOR_NUMBER} \\n
-		Build ID : ${env.BUILD_ID} \\n
-		Jenkins Name : ${env.JENKINS_URL} \\n
+		"""Result : ${currentBuild.currentResult} \n
+		Job Name : ${env.JOB_NAME} \n
+		Build Number : ${env.BUILD_NUMBER} \n
+		Build URL : ${env.BUILD_URL} \n
+		Build Name : ${env.BUILD_DISPLAY_NAME} \n
+		Base Name Of Job : ${env.JOB_BASE_NAME} \n
+		Executor Number : ${env.EXECUTOR_NUMBER} \n
+		Build ID : ${env.BUILD_ID} \n
+		Jenkins Name : ${env.JENKINS_URL} \n
 		Job URL : ${env.JOB_URL}""", subject: 'Jenkins', to: 'devmohamedar990@gmail.com'
         }
     }
