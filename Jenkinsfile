@@ -31,11 +31,31 @@ pipeline {
             steps {
                 sh './jenkins/scripts/deliver.sh' 
             }
+        }
+	stage('Error') {
+            when {
+                expression { doError == '1' }
+            }
+            steps {
+                echo "Failure"
+                error "failure test. It's work"
+            }
+        }
+        
+        stage('Success') {
+            when {
+                expression { doError == '0' }
+            }
+            steps {
+                echo "ok"
+            }
         }	
     }
 	post {
         always {
-            	emailext body: 'A7A', subject: 'A7A', to: 'mohamed_rmdan7@hotmail.com'
+
+            emailext body: '${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\\n More info at: ${env.BUILD_URL}', 		    subject: 'Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}', to: 'devmohamedar990@gmail.com'
+            
         }
     }
 }
