@@ -35,8 +35,7 @@ pipeline {
     }
 	post {
         always {
-		emailext body: '${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\\n More info at: 
-${env.BUILD_URL}', subject: 'Jenkins', to: 'devmohamedar990@gmail.com'
+		emailext body: '${currentBuild.currentResult}', subject: 'Jenkins', to: 'devmohamedar990@gmail.com'
         }
     }
 }
