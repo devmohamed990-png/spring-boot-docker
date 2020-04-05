@@ -41,7 +41,7 @@ sudo rm /lib/systemd/system/myjenkins
 sudo rm /lib/systemd/system/myjenkins
 sudo systemctl daemon-reload
 sudo systemctl reset-failed
-sudo vim /lib/systemd/system/myjenkins.service
+sudo vim /etc/systemd/system/myjenkins.service
 [Unit]
 Description=just a jar service
 After=network.target
