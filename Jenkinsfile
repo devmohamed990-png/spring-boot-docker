@@ -27,10 +27,34 @@ pipeline {
                 }
             }
         }
+	 stage('Deliver') { 
+            steps {
+                sh './jenkins/scripts/deliver.sh' 
+            }
+        }
 	stage('Cloud') {
 		steps {
-		sshPublisher(publishers: [sshPublisherDesc(configName: 'katebegapi', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''sudo kill -9 `sudo lsof -t -i:9090`
-sudo systemctl stop managment.service''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: 'target', sourceFiles: '**/target/spring-boot-docker-0.0.1-SNAPSHOT.jar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+			sshPublisher(publishers: [sshPublisherDesc(configName: 'katebegapi', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''sudo kill -9 `sudo lsof -t -i:9090`
+sudo systemctl stop myjenkins
+sudo systemctl disable myjenkins
+sudo rm /lib/systemd/system/myjenkins
+sudo rm /lib/systemd/system/myjenkins
+sudo systemctl daemon-reload
+sudo systemctl reset-failed
+sudo vim /lib/systemd/system/myjenkins.service
+[Unit]
+Description=just a jar service
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=devmohamed990
+ExecStart=/usr/bin/java -jar /home/jars/jenkins/target/spring-boot-docker-0.0.1-SNAPSHOT.jar
+[Install]
+WantedBy=multi-user.target
+:wq''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: 'target', sourceFiles: '**/target/spring-boot-docker-0.0.1-SNAPSHOT.jar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 		}
 	}
     }
