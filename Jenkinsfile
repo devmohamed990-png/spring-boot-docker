@@ -27,14 +27,10 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') { 
-            steps {
-                sh './jenkins/scripts/deliver.sh' 
-            }
-        }
 	stage('Cloud') {
 		steps {
-		
+		sshPublisher(publishers: [sshPublisherDesc(configName: 'katebegapi', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''sudo kill -9 `sudo lsof -t -i:9090`
+sudo systemctl stop managment.service''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: 'target', sourceFiles: '**/target/spring-boot-docker-0.0.1-SNAPSHOT.jar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 		}
 	}
     }
