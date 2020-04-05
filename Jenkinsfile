@@ -53,8 +53,7 @@ RestartSec=1
 User=devmohamed990
 ExecStart=/usr/bin/java -jar /home/jars/jenkins/target/spring-boot-docker-0.0.1-SNAPSHOT.jar
 [Install]
-WantedBy=multi-user.target
-:wq''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: 'target', sourceFiles: '**/target/spring-boot-docker-0.0.1-SNAPSHOT.jar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+WantedBy=multi-user.target''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: 'target', sourceFiles: '**/target/spring-boot-docker-0.0.1-SNAPSHOT.jar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
 		}
 	}
     }
